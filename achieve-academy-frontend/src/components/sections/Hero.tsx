@@ -1,3 +1,7 @@
+import laptop from "../../assets/images/laptop.png";
+import cap from "../../assets/images/cap.png";
+import book from "../../assets/images/book.png";
+
 const stats = [
   {
     value: "5000+",
@@ -81,11 +85,47 @@ const Hero = () => {
 
           <div className="absolute h-96 w-96 rounded-full bg-lime-200/30 blur-3xl"></div>
 
-          <div className="relative h-[420px] w-full rounded-[40px] bg-white shadow-2xl">
+          <div className="relative h-[430px] w-full rounded-[36px] bg-gradient-to-br from-white via-[#FDFDFD] to-[#F3F7F2] shadow-[0_30px_70px_rgba(0,0,0,0.12)] overflow-hidden">
 
-            {/* Images Part 2 */}
+            {/* Glow */}
 
-          </div>
+            <div className="absolute left-12 top-12 h-48 w-48 rounded-full bg-lime-200/40 blur-3xl"></div>
+
+            <div className="absolute bottom-0 right-0 h-52 w-52 rounded-full bg-green-100/40 blur-3xl"></div>
+
+            <img
+                src={laptop}
+                alt="Laptop"
+                className="absolute left-8 top-32 w-60 animate-float-slow drop-shadow-2xl transition duration-500 hover:scale-105"
+                />
+
+                <img
+                src={cap}
+                alt="Graduation Cap"
+                className="absolute right-24 top-8 w-32 animate-float-medium transition duration-500 hover:rotate-6"
+                />
+
+                <img
+                src={book}
+                alt="Book"
+                className="absolute bottom-6 right-8 w-56 animate-float-fast drop-shadow-xl transition duration-500 hover:scale-105"
+                />
+
+            {/* Center Text */}
+
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
+
+                <h3 className="text-2xl font-bold text-[#063F37]">
+                FUTURE
+                <br />
+                LEARNING
+                <br />
+                HUB
+                </h3>
+
+            </div>
+
+            </div>
 
         </div>
 

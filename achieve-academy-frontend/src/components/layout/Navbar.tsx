@@ -36,7 +36,7 @@ const Navbar = () => {
         {/* Logo */}
         <a href="#home" className="flex items-center gap-3">
           <img
-            src="/logo.png"
+            src="D:\Web Development project\Achieve-academy\achieve-academy-frontend\src\assets\images\logo.png"
             alt="Achieve Academy"
             className="h-10 w-10 rounded-md bg-white object-cover p-1"
           />
