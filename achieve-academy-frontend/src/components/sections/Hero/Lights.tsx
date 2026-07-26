@@ -1,20 +1,19 @@
-const Lights = () => {
+export default function Lights() {
   return (
     <>
-      <ambientLight intensity={1.2} />
+      <ambientLight intensity={1.8} />
 
       <directionalLight
-        position={[5, 8, 5]}
-        intensity={2}
         castShadow
+        intensity={3}
+        position={[5, 8, 5]}
       />
 
       <pointLight
-        position={[-5, 3, 2]}
-        intensity={1}
+        intensity={25}
+        position={[-4, 3, 3]}
+        color="#c4ff3a"
       />
     </>
   );
-};
-
-export default Lights;
+}
