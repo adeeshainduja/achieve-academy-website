@@ -1,118 +1,123 @@
-import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
-
-const navItems = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Courses", href: "#courses" },
-  { label: "Admissions", href: "#admissions" },
-  { label: "Contact", href: "#contact" },
+const stats = [
+  {
+    value: "5000+",
+    label: "Students",
+  },
+  {
+    value: "98%",
+    label: "Pass Rate",
+  },
+  {
+    value: "50+",
+    label: "Expert Lecturers",
+  },
+  {
+    value: "15+",
+    label: "Years Experience",
+  },
 ];
 
-const Navbar = () => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
+const Hero = () => {
   return (
-    <header
-      className={`fixed top-0 left-0 z-50 w-full transition-all duration-300 ${
-        isScrolled
-          ? "bg-white/85 backdrop-blur-xl shadow-md"
-          : "bg-white/15 backdrop-blur-xl"
-      }`}
+    <section
+      id="home"
+      className="relative overflow-hidden bg-[#FBFCFB] pt-32"
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-8 py-3">
+      {/* Background Blur */}
+      <div className="absolute -left-20 top-0 h-72 w-72 rounded-full bg-lime-100 blur-3xl opacity-70"></div>
 
-        {/* Logo */}
-        <a href="#home" className="flex items-center gap-3">
-          <img
-            src="/logo.png"
-            alt="Achieve Academy"
-            className="h-10 w-10 rounded-md bg-white object-cover p-1"
-          />
+      <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-16 px-6 lg:flex-row lg:px-8">
 
-          <span className="text-2xl font-bold text-[#063F37]">
-            Achieve Academy
-          </span>
-        </a>
+        {/* Left Side */}
+        <div className="max-w-xl">
 
-        {/* Desktop Navigation */}
-        <nav className="hidden items-center gap-10 lg:flex">
-          {navItems.map((item, index) => (
+          <h1 className="text-5xl font-extrabold leading-none text-[#033B34] md:text-6xl lg:text-7xl">
+
+            Empowering
+
+            <br />
+
+            Students for a
+
+            <br />
+
+            <span className="text-[#78B600]">
+              Brighter Future
+            </span>
+
+          </h1>
+
+          <p className="mt-8 text-lg leading-9 text-gray-600">
+            Achieve Academy provides high-quality education for
+            O/L and A/L students through experienced lecturers,
+            structured learning pathways, and AI-powered academic
+            support to help every student achieve their full
+            potential.
+          </p>
+
+          <div className="mt-10 flex flex-wrap gap-4">
+
             <a
-              key={item.label}
-              href={item.href}
-              className={`relative text-lg transition-colors duration-300 ${
-                index === 0
-                  ? "font-semibold text-[#063F37]"
-                  : "text-gray-700 hover:text-[#063F37]"
-              }`}
+              href="#courses"
+              className="rounded-full bg-[#003F34] px-8 py-4 text-lg font-medium text-white transition duration-300 hover:scale-105 hover:bg-[#002E27]"
             >
-              {item.label}
-
-              {index === 0 && (
-                <span className="absolute -bottom-2 left-0 h-[3px] w-full rounded-full bg-[#6A8B33]" />
-              )}
+              Explore Courses
             </a>
-          ))}
-        </nav>
 
-        {/* CTA */}
-        <div className="hidden lg:block">
-          <a
-            href="#admissions"
-            className="rounded-full bg-[#004D3B] px-7 py-3 font-medium text-white transition hover:bg-[#00362A]"
-          >
-            Enroll Now
-          </a>
+            <a
+              href="#contact"
+              className="rounded-full bg-[#B8FF30] px-8 py-4 text-lg font-medium text-[#033B34] transition duration-300 hover:scale-105"
+            >
+              Contact Us
+            </a>
+
+          </div>
+
         </div>
 
-        {/* Mobile Button */}
-        <button
-          className="lg:hidden"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        >
-          {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-        </button>
+        {/* Right Side */}
+
+        <div className="relative flex h-[500px] w-full max-w-xl items-center justify-center">
+
+          <div className="absolute h-96 w-96 rounded-full bg-lime-200/30 blur-3xl"></div>
+
+          <div className="relative h-[420px] w-full rounded-[40px] bg-white shadow-2xl">
+
+            {/* Images Part 2 */}
+
+          </div>
+
+        </div>
+
       </div>
 
-      {/* Mobile Menu */}
-      {mobileMenuOpen && (
-        <div className="border-t border-gray-200 bg-white lg:hidden">
-          <nav className="flex flex-col gap-5 px-8 py-6">
-            {navItems.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-lg text-gray-700"
-              >
-                {item.label}
-              </a>
-            ))}
+      {/* Statistics */}
 
-            <a
-              href="#admissions"
-              className="rounded-full bg-[#004D3B] py-3 text-center font-medium text-white"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Enroll Now
-            </a>
-          </nav>
-        </div>
-      )}
-    </header>
+      <div className="mx-auto mt-24 grid max-w-7xl grid-cols-2 gap-10 border-t border-gray-200 py-14 lg:grid-cols-4">
+
+        {stats.map((item) => (
+
+          <div
+            key={item.label}
+            className="text-center"
+          >
+
+            <h2 className="text-5xl font-bold text-[#033B34]">
+              {item.value}
+            </h2>
+
+            <p className="mt-4 uppercase tracking-[5px] text-gray-500">
+              {item.label}
+            </p>
+
+          </div>
+
+        ))}
+
+      </div>
+
+    </section>
   );
 };
 
-export default Navbar;
+export default Hero;

@@ -1,93 +1,114 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 
 const navItems = [
-  { name: "Home", href: "#home" },
-  { name: "About", href: "#about" },
-  { name: "Courses", href: "#courses" },
-  { name: "Admissions", href: "#admissions" },
-  { name: "Contact", href: "#contact" },
+  { label: "Home", href: "#home" },
+  { label: "About", href: "#about" },
+  { label: "Courses", href: "#courses" },
+  { label: "Admissions", href: "#admissions" },
+  { label: "Contact", href: "#contact" },
 ];
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <header
-        className="
-            fixed top-0 left-0 z-50 w-full
-            border-b border-white/20
-            bg-green/15
-            backdrop-blur-xl
-            supports-[backdrop-filter]:bg-white/10
-            transition-all duration-300
-        "
-        >
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-8 py-2.5">
+      className={`fixed top-0 left-0 z-50 w-full transition-all duration-300 ${
+        isScrolled
+          ? "bg-white/85 backdrop-blur-xl shadow-md"
+          : "bg-white/15 backdrop-blur-xl"
+      }`}
+    >
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-8 py-3">
 
         {/* Logo */}
-        <div className="flex items-center gap-2">
+        <a href="#home" className="flex items-center gap-3">
           <img
             src="/logo.png"
             alt="Achieve Academy"
-            className="w-10 h-10 rounded bg-white p-1"
+            className="h-10 w-10 rounded-md bg-white object-cover p-1"
           />
 
-          <h1 className="text-2xl font-bold text-[#0C3D33]">
+          <span className="text-2xl font-bold text-[#063F37]">
             Achieve Academy
-          </h1>
-        </div>
+          </span>
+        </a>
 
-        {/* Desktop Menu */}
-        <nav className="hidden lg:flex items-center gap-7">
+        {/* Desktop Navigation */}
+        <nav className="hidden items-center gap-10 lg:flex">
           {navItems.map((item, index) => (
             <a
-              key={item.name}
+              key={item.label}
               href={item.href}
-              className={`relative text-lg transition ${
+              className={`relative text-lg transition-colors duration-300 ${
                 index === 0
-                  ? "font-semibold text-[#0C3D33]"
-                  : "text-gray-700 hover:text-[#0C3D33]"
+                  ? "font-semibold text-[#063F37]"
+                  : "text-gray-700 hover:text-[#063F37]"
               }`}
             >
-              {item.name}
+              {item.label}
 
               {index === 0 && (
-                <span className="absolute left-0 -bottom-2 h-[3px] w-full rounded-full bg-[#5B7F2C]" />
+                <span className="absolute -bottom-2 left-0 h-[3px] w-full rounded-full bg-[#6A8B33]" />
               )}
             </a>
           ))}
         </nav>
 
-        {/* Button */}
+        {/* CTA */}
         <div className="hidden lg:block">
-          <button className="rounded-full bg-[#004D3B] px-8 py-3 text-white font-medium hover:bg-[#00352A] transition">
+          <a
+            href="#admissions"
+            className="rounded-full bg-[#004D3B] px-7 py-3 font-medium text-white transition hover:bg-[#00362A]"
+          >
             Enroll Now
-          </button>
+          </a>
         </div>
 
-        {/* Mobile */}
+        {/* Mobile Button */}
         <button
           className="lg:hidden"
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
-          {isOpen ? <X size={30} /> : <Menu size={30} />}
+          {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
 
-      {isOpen && (
-        <div className="lg:hidden bg-white">
-          <div className="flex flex-col gap-6 px-8 py-6">
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <div className="border-t border-gray-200 bg-white lg:hidden">
+          <nav className="flex flex-col gap-5 px-8 py-6">
             {navItems.map((item) => (
-              <a key={item.name} href={item.href}>
-                {item.name}
+              <a
+                key={item.label}
+                href={item.href}
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-lg text-gray-700"
+              >
+                {item.label}
               </a>
             ))}
 
-            <button className="rounded-full bg-[#004D3B] py-3 text-white">
+            <a
+              href="#admissions"
+              className="rounded-full bg-[#004D3B] py-3 text-center font-medium text-white"
+              onClick={() => setMobileMenuOpen(false)}
+            >
               Enroll Now
-            </button>
-          </div>
+            </a>
+          </nav>
         </div>
       )}
     </header>
