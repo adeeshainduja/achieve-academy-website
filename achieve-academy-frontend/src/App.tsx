@@ -3,6 +3,7 @@ import Hero from "./components/sections/Hero/Hero";
 import AboutSection from "./components/sections/AboutSection";
 import Programs from "./components/sections/Programs";
 import Admissions from "./components/sections/Admissions";
+import SuccessStories from "./components/sections/SuccessStories";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <AboutSection />
       <Programs />
       <Admissions />
+      <SuccessStories />
     </div>
   );
 }
