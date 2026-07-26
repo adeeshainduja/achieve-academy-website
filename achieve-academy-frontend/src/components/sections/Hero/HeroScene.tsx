@@ -1,15 +1,23 @@
 import { Canvas } from "@react-three/fiber";
+import Student from "./Student";
 
 export default function HeroScene() {
-  console.log("HeroScene Loaded");
-
   return (
-    <Canvas camera={{ position: [0, 0, 5], fov: 50 }}>
+    <Canvas
+      camera={{
+        position: [0, 2, 8],
+        fov: 45,
+      }}
+      shadows
+    >
       <ambientLight intensity={2} />
-      <mesh>
-        <boxGeometry args={[1, 1, 1]} />
-        <meshNormalMaterial />
-      </mesh>
+
+      <directionalLight
+        position={[5, 5, 5]}
+        intensity={3}
+      />
+
+      <Student />
     </Canvas>
   );
 }
