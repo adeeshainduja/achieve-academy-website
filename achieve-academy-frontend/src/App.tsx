@@ -4,6 +4,7 @@ import AboutSection from "./components/sections/AboutSection";
 import Programs from "./components/sections/Programs";
 import Admissions from "./components/sections/Admissions";
 import SuccessStories from "./components/sections/SuccessStories";
+import CTA from "./components/sections/CTA";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Programs />
       <Admissions />
       <SuccessStories />
+      <CTA />
     </div>
   );
 }
