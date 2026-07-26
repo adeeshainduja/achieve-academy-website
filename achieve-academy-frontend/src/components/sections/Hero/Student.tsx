@@ -28,9 +28,9 @@ export default function Student() {
   return (
     <group
       ref={group}
-      position={[-3, -1, 0]}
-      rotation={[0, Math.PI / 2, 0]}
-      scale={1.2}
+      position={[-2.5, -1.4, 0]}
+      rotation={[0, -Math.PI / 2, 0]}
+      scale={2.6}
     >
       <primitive object={scene} />
     </group>
