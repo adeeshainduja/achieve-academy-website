@@ -23,7 +23,17 @@ export default function Hero() {
         {/* Left */}
         <div className="max-w-xl">
 
-          <h1 className="text-5xl font-extrabold leading-tight text-[#033B34] md:text-6xl lg:text-7xl">
+          <h1
+            className="
+              text-4xl
+              sm:text-5xl
+              lg:text-6xl
+              font-extrabold
+              leading-[1.08]
+              tracking-[0.02em]
+              text-[#033B34]
+            "
+          >
             Empowering
             <br />
             Students For A
