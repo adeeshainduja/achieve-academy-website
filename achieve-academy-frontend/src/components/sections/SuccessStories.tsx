@@ -1,4 +1,4 @@
-import { Star } from "lucide-react";
+import { Star, ArrowRight } from "lucide-react";
 
 const testimonials = [
   {
@@ -36,29 +36,28 @@ export default function SuccessStories() {
       <div className="mx-auto max-w-7xl px-6">
 
         {/* Heading */}
-
         <div className="text-center">
+
           <h2 className="text-5xl font-bold text-[#083B35]">
             Student Success Stories
           </h2>
 
-          <p className="mt-4 text-gray-500">
+          <p className="mt-4 text-lg text-gray-500">
             Hear from students who achieved their academic goals at Achieve
             Academy.
           </p>
+
         </div>
 
         {/* Cards */}
-
         <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
 
           {testimonials.map((student) => (
             <div
               key={student.id}
-              className="rounded-3xl border border-gray-200 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
+              className="group rounded-3xl border border-gray-200 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
             >
               {/* Rating */}
-
               <div className="mb-6 flex text-lime-600">
                 {[...Array(5)].map((_, index) => (
                   <Star
@@ -71,14 +70,13 @@ export default function SuccessStories() {
               </div>
 
               {/* Review */}
-
               <p className="italic leading-8 text-gray-600">
                 "{student.review}"
               </p>
 
               {/* Student */}
-
               <div className="mt-8 flex items-center gap-4">
+
                 <img
                   src={student.image}
                   alt={student.name}
@@ -86,6 +84,7 @@ export default function SuccessStories() {
                 />
 
                 <div>
+
                   <h4 className="font-semibold text-[#083B35]">
                     {student.name}
                   </h4>
@@ -97,11 +96,61 @@ export default function SuccessStories() {
                   <p className="text-sm font-medium text-lime-700">
                     {student.school}
                   </p>
+
                 </div>
+
               </div>
 
             </div>
           ))}
+
+        </div>
+
+        {/* Statistics */}
+        <div className="mt-16 flex flex-wrap items-center justify-center gap-12 text-center">
+
+          <div>
+            <h3 className="text-4xl font-bold text-[#083B35]">
+              98%
+            </h3>
+            <p className="mt-2 text-gray-500">
+              Student Satisfaction
+            </p>
+          </div>
+
+          <div>
+            <h3 className="text-4xl font-bold text-[#083B35]">
+              2,500+
+            </h3>
+            <p className="mt-2 text-gray-500">
+              Successful Students
+            </p>
+          </div>
+
+          <div>
+            <h3 className="text-4xl font-bold text-[#083B35]">
+              120+
+            </h3>
+            <p className="mt-2 text-gray-500">
+              University Selections
+            </p>
+          </div>
+
+        </div>
+
+        {/* Read More Button */}
+        <div className="mt-14 flex justify-center">
+
+          <button className="group inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-lime-500 to-lime-600 px-8 py-4 text-lg font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
+
+            Read More Success Stories
+
+            <ArrowRight
+              size={20}
+              className="transition-transform duration-300 group-hover:translate-x-1"
+            />
+
+          </button>
 
         </div>
 
