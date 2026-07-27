@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, Search, X } from "lucide-react";
+import logo from "../../assets/images/logo.png";
 
 const navItems = [
   { label: "Home", href: "#home" },
@@ -15,7 +16,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 30);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -24,62 +25,83 @@ const Navbar = () => {
   }, []);
 
   return (
-    <header
-      className={`fixed top-0 left-0 z-50 w-full transition-all duration-300 ${
-        isScrolled
-          ? "bg-white/85 backdrop-blur-xl shadow-md"
-          : "bg-white/15 backdrop-blur-xl"
-      }`}
-    >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-8 py-3">
-
+    <header className="fixed top-0 left-0 z-50 w-full">
+      <div
+        className={`mx-auto mt-1 flex max-w-[1600px] items-center justify-between rounded-xl border border-white/10 px-8 py-2 transition-all duration-500 ${
+          isScrolled
+            ? "bg-[#1B1F29]/95 backdrop-blur-xl shadow-2xl"
+            : "bg-[#1B1F29]/90 backdrop-blur-lg"
+        }`}
+      >
         {/* Logo */}
-        <a href="#home" className="flex items-center gap-3">
+        <a
+          href="#home"
+          className="flex items-center gap-3 transition-transform duration-300 hover:scale-105"
+        >
           <img
-            src="D:\Web Development project\Achieve-academy\achieve-academy-frontend\src\assets\images\logo.png"
+            src={logo}
             alt="Achieve Academy"
-            className="h-10 w-10 rounded-md bg-white object-cover p-1"
+            className="h-7 w-7 rounded-lg object-cover"
           />
 
-          <span className="text-2xl font-bold text-[#063F37]">
+          <span className="text-2xl font-bold tracking-tight text-white">
             Achieve Academy
           </span>
         </a>
 
         {/* Desktop Navigation */}
-        <nav className="hidden items-center gap-10 lg:flex">
+        <nav className="hidden items-center gap-12 lg:flex">
           {navItems.map((item, index) => (
             <a
               key={item.label}
               href={item.href}
-              className={`relative text-lg transition-colors duration-300 ${
+              className={`group relative text-lg font-medium transition-all duration-300 ${
                 index === 0
-                  ? "font-semibold text-[#063F37]"
-                  : "text-gray-700 hover:text-[#063F37]"
+                  ? "text-white"
+                  : "text-gray-300 hover:text-white"
               }`}
             >
               {item.label}
 
-              {index === 0 && (
-                <span className="absolute -bottom-2 left-0 h-[3px] w-full rounded-full bg-[#6A8B33]" />
-              )}
+              <span
+                className={`absolute left-0 -bottom-2 h-[3px] rounded-full bg-[#39E63F] transition-all duration-300 ${
+                  index === 0 ? "w-full" : "w-0 group-hover:w-full"
+                }`}
+              />
             </a>
           ))}
         </nav>
 
-        {/* CTA */}
-        <div className="hidden lg:block">
+        {/* Right Side */}
+        <div className="hidden items-center gap-4 lg:flex">
+          {/* Search */}
+
+          <div className="flex items-center overflow-hidden rounded-full border border-[#2F3744] bg-[#222833]">
+            <input
+              type="text"
+              placeholder="Search"
+              className="w-64 bg-transparent px-5 py-1.5 text-white placeholder:text-gray-400 outline-none"
+            />
+
+            <button className="flex h-9 w-11 items-center justify-center bg-[#499A13] transition hover:bg-[#2DD636]">
+              <Search size={20} className="text-white" />
+            </button>
+          </div>
+
+          {/* CTA */}
+
           <a
             href="#admissions"
-            className="rounded-full bg-[#004D3B] px-7 py-3 font-medium text-white transition hover:bg-[#00362A]"
+            className="rounded-full bg-[#499A13] px-7 py-1.5 font-semibold text-[#1B1F29] shadow-lg transition-all duration-300 hover:scale-105 hover:bg-[#2DD636]"
           >
             Enroll Now
           </a>
         </div>
 
-        {/* Mobile Button */}
+        {/* Mobile Menu Button */}
+
         <button
-          className="lg:hidden"
+          className="rounded-lg p-2 text-white transition hover:bg-white/10 lg:hidden"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
           {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
@@ -87,30 +109,49 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Menu */}
-      {mobileMenuOpen && (
-        <div className="border-t border-gray-200 bg-white lg:hidden">
-          <nav className="flex flex-col gap-5 px-8 py-6">
+
+      <div
+        className={`overflow-hidden transition-all duration-500 lg:hidden ${
+          mobileMenuOpen ? "max-h-[500px]" : "max-h-0"
+        }`}
+      >
+        <div className="mx-3 mt-3 rounded-2xl border border-white/10 bg-[#1B1F29] p-6 shadow-2xl">
+          <nav className="flex flex-col gap-5">
             {navItems.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-lg text-gray-700"
+                className="text-lg font-medium text-gray-300 transition hover:translate-x-2 hover:text-white"
               >
                 {item.label}
               </a>
             ))}
 
+            {/* Mobile Search */}
+
+            <div className="mt-1 flex items-center overflow-hidden rounded-full border border-[#2F3744] bg-[#222833]">
+              <input
+                type="text"
+                placeholder="Search"
+                className="flex-1 bg-transparent px-5 py-3 text-white placeholder:text-gray-400 outline-none"
+              />
+
+              <button className="flex h-12 w-14 items-center justify-center bg-[#39E63F]">
+                <Search size={20} className="text-white" />
+              </button>
+            </div>
+
             <a
               href="#admissions"
-              className="rounded-full bg-[#004D3B] py-3 text-center font-medium text-white"
               onClick={() => setMobileMenuOpen(false)}
+              className="mt-3 rounded-full bg-[#39E63F] py-3 text-center font-semibold text-[#1B1F29] transition hover:bg-[#2DD636]"
             >
               Enroll Now
             </a>
           </nav>
         </div>
-      )}
+      </div>
     </header>
   );
 };

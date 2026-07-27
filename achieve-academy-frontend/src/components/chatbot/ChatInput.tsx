@@ -38,7 +38,7 @@ export default function ChatInput({
 
       <button
         onClick={handleSend}
-        className="rounded-xl bg-blue-600 p-3 text-white transition hover:bg-blue-700"
+        className="rounded-xl bg-[#499A13] p-3 text-white transition hover:bg-[#2DD636]"
       >
         <Send size={18} />
       </button>
