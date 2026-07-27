@@ -13,19 +13,50 @@ const navItems = [
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
+    let lastScrollY = window.scrollY;
+
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 30);
+      const currentScrollY = window.scrollY;
+
+      setIsScrolled(currentScrollY > 30);
+
+      if (currentScrollY < 80) {
+        setVisible(true);
+      } else if (currentScrollY > lastScrollY) {
+        // Scrolling down
+        setVisible(false);
+      } else {
+        // Scrolling up
+        setVisible(true);
+      }
+
+      lastScrollY = currentScrollY;
+    };
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (e.clientY < 70) {
+        setVisible(true);
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
+    window.addEventListener("mousemove", handleMouseMove);
 
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
   }, []);
 
   return (
-    <header className="fixed top-0 left-0 z-50 w-full">
+    <header
+      className={`fixed top-0 left-0 z-50 w-full transition-transform duration-500 ease-in-out ${
+        visible ? "translate-y-0" : "-translate-y-full"
+      }`}
+    >
       <div
         className={`mx-auto mt-1 flex max-w-[1600px] items-center justify-between rounded-xl border border-white/10 px-8 py-2 transition-all duration-500 ${
           isScrolled
@@ -74,8 +105,6 @@ const Navbar = () => {
 
         {/* Right Side */}
         <div className="hidden items-center gap-4 lg:flex">
-          {/* Search */}
-
           <div className="flex items-center overflow-hidden rounded-full border border-[#2F3744] bg-[#222833]">
             <input
               type="text"
@@ -88,8 +117,6 @@ const Navbar = () => {
             </button>
           </div>
 
-          {/* CTA */}
-
           <a
             href="#admissions"
             className="rounded-full bg-[#499A13] px-7 py-1.5 font-semibold text-[#1B1F29] shadow-lg transition-all duration-300 hover:scale-105 hover:bg-[#2DD636]"
@@ -99,7 +126,6 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Menu Button */}
-
         <button
           className="rounded-lg p-2 text-white transition hover:bg-white/10 lg:hidden"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -109,7 +135,6 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Menu */}
-
       <div
         className={`overflow-hidden transition-all duration-500 lg:hidden ${
           mobileMenuOpen ? "max-h-[500px]" : "max-h-0"
@@ -127,8 +152,6 @@ const Navbar = () => {
                 {item.label}
               </a>
             ))}
-
-            {/* Mobile Search */}
 
             <div className="mt-1 flex items-center overflow-hidden rounded-full border border-[#2F3744] bg-[#222833]">
               <input
