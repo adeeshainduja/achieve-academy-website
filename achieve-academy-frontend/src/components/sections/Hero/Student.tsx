@@ -1,54 +1,61 @@
 import { useEffect, useRef } from "react";
-import { Group } from "three";
 import { useFrame } from "@react-three/fiber";
 import { useAnimations, useGLTF } from "@react-three/drei";
+import * as THREE from "three";
 
 export default function Student() {
-  const group = useRef<Group>(null);
+  const group = useRef<THREE.Group>(null);
 
-  // Load model
-  const { scene, animations } = useGLTF("/models/student_run.glb");
-
-  // Setup animations
+  const { scene, animations } = useGLTF("/models/boy.glb");
   const { actions } = useAnimations(animations, group);
 
   useEffect(() => {
-    const animation = Object.values(actions)[0];
+    scene.traverse((child) => {
+      if (child instanceof THREE.Mesh) {
+        child.castShadow = true;
+        child.receiveShadow = true;
+      }
+    });
 
-    if (animation) {
-      animation.reset();
-      animation.fadeIn(0.3);
-      animation.play();
-    }
+    const firstAnimation = Object.values(actions)[0];
+    firstAnimation?.reset().fadeIn(0.5).play();
+  }, [actions, scene]);
 
-    return () => {
-      animation?.fadeOut(0.3);
-    };
-  }, [actions]);
-
-  // Character movement
-  useFrame((_, delta) => {
+  useFrame(({ clock, mouse }) => {
     if (!group.current) return;
 
-    // Run forward until reaching trophy
-    if (group.current.position.x < 1.8) {
-      group.current.position.x += delta * 1.2;
-    }
+    const t = clock.getElapsedTime();
+
+    // Floating
+    group.current.position.y =
+      -1 + Math.sin(t * 2) * 0.03;
+
+    // Face trophy + mouse
+    const targetRotation = -0.65 + mouse.x * 0.15;
+
+    group.current.rotation.y = THREE.MathUtils.lerp(
+      group.current.rotation.y,
+      targetRotation,
+      0.05
+    );
+
+    group.current.rotation.z = THREE.MathUtils.lerp(
+      group.current.rotation.z,
+      mouse.x * 0.02,
+      0.05
+    );
   });
 
   return (
     <group
       ref={group}
-      position={[-2.8, -1.4, 0]}
-      rotation={[0, -Math.PI / 2, 0]}
-      scale={2.6}
-      castShadow
-      receiveShadow
+      position={[0.6, -1, -0.15]}
+      rotation={[0, -0.65, 0]}
+      scale={0.95}
     >
       <primitive object={scene} />
     </group>
   );
 }
 
-// Preload model
-useGLTF.preload("/models/student_run.glb");
+useGLTF.preload("/models/boy.glb");
