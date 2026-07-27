@@ -1,14 +1,22 @@
 import HeroScene from "./HeroScene";
 
-
 export default function Hero() {
   return (
     <section
       id="home"
-      className="relative overflow-hidden bg-[#FBFCFB] pt-28"
+      className="relative overflow-hidden bg-[#FBFCFB] pt-24 md:pt-28"
     >
-      {/* Background Blur */}
-      <div className="absolute -left-24 top-0 h-80 w-80 rounded-full bg-lime-100 opacity-70 blur-3xl" />
+      {/* Background Gradient */}
+      <div className="absolute inset-0 -z-10">
+        {/* Left Glow */}
+        <div className="absolute -left-32 top-10 h-[420px] w-[420px] rounded-full bg-lime-100 opacity-70 blur-[120px]" />
+
+        {/* Right Glow */}
+        <div className="absolute right-0 top-1/2 h-[550px] w-[550px] -translate-y-1/2 rounded-full bg-green-200/70 blur-[150px]" />
+
+        {/* Small Top Right Glow */}
+        <div className="absolute right-20 top-10 h-60 w-60 rounded-full bg-lime-100 opacity-70 blur-[100px]" />
+      </div>
 
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-12 px-6 lg:flex-row lg:px-8">
 
@@ -39,29 +47,34 @@ export default function Hero() {
                   behavior: "smooth",
                 })
               }
-              className="rounded-full bg-[#0B3C36] px-10 py-5 text-lg font-semibold text-white transition-all duration-300 hover:scale-105"
+              className="rounded-full bg-[#0B3C36] px-10 py-5 text-lg font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
             >
               Explore Courses
             </button>
 
             <button
-            onClick={() =>
-              document.getElementById("contact")?.scrollIntoView({
-                behavior: "smooth",
-              })
-            }
-            className="rounded-full bg-lime-400 px-10 py-5 text-lg font-semibold text-[#0B3C36] transition-all duration-300 hover:scale-105"
-          >
-            Contact Us
-          </button>
+              onClick={() =>
+                document.getElementById("contact")?.scrollIntoView({
+                  behavior: "smooth",
+                })
+              }
+              className="rounded-full border-2 border-[#78B600] bg-white px-10 py-5 text-lg font-semibold text-[#0B3C36] transition-all duration-300 hover:bg-lime-50"
+            >
+              Contact Us
+            </button>
 
           </div>
 
         </div>
 
         {/* Right */}
-        <div className="relative h-[650px] w-full max-w-[650px]">
+        <div className="relative h-[380px] w-full max-w-[650px] sm:h-[450px] md:h-[520px] lg:h-[650px]">
+
+          {/* Glow Behind 3D Model */}
+          <div className="absolute left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-lime-200/60 blur-[110px]" />
+
           <HeroScene />
+
         </div>
 
       </div>
