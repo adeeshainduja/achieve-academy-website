@@ -1,7 +1,9 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
+from sqlalchemy.orm import Session
 
+from app.database import get_db
 from app.schemas.chatbot import ChatRequest, ChatResponse
-from app.services.gemini_service import generate_response
+from app.services.chatbot_service import process_chat
 
 router = APIRouter(
     prefix="/api/chat",
@@ -10,8 +12,11 @@ router = APIRouter(
 
 
 @router.post("/", response_model=ChatResponse)
-def chat(request: ChatRequest):
+def chat(
+    request: ChatRequest,
+    db: Session = Depends(get_db)
+):
 
-    reply = generate_response(request.message)
+    reply = process_chat(request.message, db)
 
     return ChatResponse(reply=reply)
