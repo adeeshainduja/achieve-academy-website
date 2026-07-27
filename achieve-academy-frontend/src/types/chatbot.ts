@@ -1,13 +1,13 @@
-export interface ChatMessage {
-    id: number;
-    sender: "user" | "bot";
-    message: string;
-}
-
 export interface ChatRequest {
-    message: string;
+  message: string;
 }
 
 export interface ChatResponse {
-    reply: string;
+  reply: string;
+}
+
+export interface Message {
+  id: number;
+  sender: "user" | "bot";
+  text: string;
 }
