@@ -85,7 +85,7 @@ export default function Footer() {
                 />
 
                 <span>
-                  admissions@achieveacademy.lk
+                  ad@achieveacademy.lk
                 </span>
 
               </div>

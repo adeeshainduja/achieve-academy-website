@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Menu, Search, X } from "lucide-react";
+import { BotMessageSquare, Menu, X } from "lucide-react";
 import logo from "../../assets/images/logo.png";
 
 const navItems = [
@@ -15,8 +15,14 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [visible, setVisible] = useState(true);
 
+  // Active Navigation
+  const [activeSection, setActiveSection] = useState("home");
+
   useEffect(() => {
     let lastScrollY = window.scrollY;
+
+    const sections =
+      document.querySelectorAll<HTMLElement>("section[id]");
 
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -26,14 +32,28 @@ const Navbar = () => {
       if (currentScrollY < 80) {
         setVisible(true);
       } else if (currentScrollY > lastScrollY) {
-        // Scrolling down
         setVisible(false);
       } else {
-        // Scrolling up
         setVisible(true);
       }
 
       lastScrollY = currentScrollY;
+
+      let current = "home";
+
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop - 120;
+        const sectionHeight = section.offsetHeight;
+
+        if (
+          currentScrollY >= sectionTop &&
+          currentScrollY < sectionTop + sectionHeight
+        ) {
+          current = section.id;
+        }
+      });
+
+      setActiveSection(current);
     };
 
     const handleMouseMove = (e: MouseEvent) => {
@@ -41,6 +61,8 @@ const Navbar = () => {
         setVisible(true);
       }
     };
+
+    handleScroll();
 
     window.addEventListener("scroll", handleScroll);
     window.addEventListener("mousemove", handleMouseMove);
@@ -64,9 +86,19 @@ const Navbar = () => {
             : "bg-[#1B1F29]/90 backdrop-blur-lg"
         }`}
       >
-        {/* Logo */}
+                {/* Logo */}
         <a
           href="#home"
+          onClick={(e) => {
+            e.preventDefault();
+
+            document.querySelector("#home")?.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+
+            setActiveSection("home");
+          }}
           className="flex items-center gap-3 transition-transform duration-300 hover:scale-105"
         >
           <img
@@ -81,48 +113,82 @@ const Navbar = () => {
         </a>
 
         {/* Desktop Navigation */}
-        <nav className="hidden items-center gap-12 lg:flex">
-          {navItems.map((item, index) => (
-            <a
-              key={item.label}
-              href={item.href}
-              className={`group relative text-lg font-medium transition-all duration-300 ${
-                index === 0
-                  ? "text-white"
-                  : "text-gray-300 hover:text-white"
-              }`}
-            >
-              {item.label}
+        <nav className="hidden items-center gap-10 lg:flex">
+          {navItems.map((item) => {
+            const isActive =
+              activeSection === item.href.replace("#", "");
 
-              <span
-                className={`absolute left-0 -bottom-2 h-[3px] rounded-full bg-[#39E63F] transition-all duration-300 ${
-                  index === 0 ? "w-full" : "w-0 group-hover:w-full"
+            return (
+              <a
+                key={item.label}
+                href={item.href}
+                onClick={(e) => {
+                  e.preventDefault();
+
+                  document.querySelector(item.href)?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                  });
+
+                  setActiveSection(item.href.replace("#", ""));
+                }}
+                className={`group relative text-lg font-medium transition-all duration-300 ${
+                  isActive
+                    ? "text-white"
+                    : "text-gray-300 hover:text-white"
                 }`}
-              />
-            </a>
-          ))}
-        </nav>
+              >
+                {item.label}
 
-        {/* Right Side */}
+                <span
+                  className={`absolute -bottom-2 left-0 h-[3px] rounded-full bg-[#39E63F] transition-all duration-300 ${
+                    isActive
+                      ? "w-full"
+                      : "w-0 group-hover:w-full"
+                  }`}
+                />
+              </a>
+            );
+          })}
+        </nav>
+                {/* Right Side */}
         <div className="hidden items-center gap-4 lg:flex">
-          <div className="flex items-center overflow-hidden rounded-full border border-[#2F3744] bg-[#222833]">
-            <input
-              type="text"
-              placeholder="Search"
-              className="w-64 bg-transparent px-5 py-1.5 text-white placeholder:text-gray-400 outline-none"
+
+          {/* AI Assistant */}
+          <button
+            onClick={() => {
+              window.dispatchEvent(new Event("open-ai-chat"));
+            }}
+            className="group flex items-center gap-2 rounded-full border border-slate-700 bg-slate-800 px-5 py-2 text-white transition-all duration-300 hover:border-[#39E63F] hover:bg-slate-700 hover:shadow-lg"
+          >
+            <BotMessageSquare
+              size={20}
+              className="text-[#39E63F] transition-transform duration-300 group-hover:rotate-6"
             />
 
-            <button className="flex h-9 w-11 items-center justify-center bg-[#499A13] transition hover:bg-[#2DD636]">
-              <Search size={20} className="text-white" />
-            </button>
-          </div>
+            <span className="font-medium">
+              AI Assistant
+            </span>
+          </button>
 
+          {/* Enroll Button */}
           <a
             href="#admissions"
-            className="rounded-full bg-[#499A13] px-7 py-1.5 font-semibold text-[#1B1F29] shadow-lg transition-all duration-300 hover:scale-105 hover:bg-[#2DD636]"
+            onClick={(e) => {
+              e.preventDefault();
+
+              document.querySelector("#admissions")?.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+              });
+
+              setActiveSection("admissions");
+            }}
+            className="rounded-full bg-[#499A13] px-7 py-2 font-semibold text-[#1B1F29] shadow-lg transition-all duration-300 hover:scale-105 hover:bg-[#2DD636]"
           >
             Enroll Now
           </a>
+
         </div>
 
         {/* Mobile Menu Button */}
@@ -130,49 +196,102 @@ const Navbar = () => {
           className="rounded-lg p-2 text-white transition hover:bg-white/10 lg:hidden"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
-          {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          {mobileMenuOpen ? (
+            <X size={28} />
+          ) : (
+            <Menu size={28} />
+          )}
         </button>
-      </div>
 
-      {/* Mobile Menu */}
+      </div>
+            {/* Mobile Menu */}
       <div
         className={`overflow-hidden transition-all duration-500 lg:hidden ${
-          mobileMenuOpen ? "max-h-[500px]" : "max-h-0"
+          mobileMenuOpen ? "max-h-[600px]" : "max-h-0"
         }`}
       >
         <div className="mx-3 mt-3 rounded-2xl border border-white/10 bg-[#1B1F29] p-6 shadow-2xl">
-          <nav className="flex flex-col gap-5">
-            {navItems.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-lg font-medium text-gray-300 transition hover:translate-x-2 hover:text-white"
-              >
-                {item.label}
-              </a>
-            ))}
 
-            <div className="mt-1 flex items-center overflow-hidden rounded-full border border-[#2F3744] bg-[#222833]">
-              <input
-                type="text"
-                placeholder="Search"
-                className="flex-1 bg-transparent px-5 py-3 text-white placeholder:text-gray-400 outline-none"
+          <nav className="flex flex-col gap-5">
+
+            {navItems.map((item) => {
+              const isActive =
+                activeSection === item.href.replace("#", "");
+
+              return (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  onClick={(e) => {
+                    e.preventDefault();
+
+                    document
+                      .querySelector(item.href)
+                      ?.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start",
+                      });
+
+                    setActiveSection(
+                      item.href.replace("#", "")
+                    );
+
+                    setMobileMenuOpen(false);
+                  }}
+                  className={`rounded-lg px-3 py-2 text-lg font-medium transition-all duration-300 ${
+                    isActive
+                      ? "bg-[#39E63F]/10 text-[#39E63F]"
+                      : "text-gray-300 hover:bg-white/5 hover:text-white"
+                  }`}
+                >
+                  {item.label}
+                </a>
+              );
+            })}
+
+            {/* Mobile AI Assistant */}
+            <button
+              onClick={() => {
+                window.dispatchEvent(
+                  new Event("open-ai-chat")
+                );
+                setMobileMenuOpen(false);
+              }}
+              className="mt-2 flex items-center justify-center gap-2 rounded-full border border-slate-700 bg-slate-800 py-3 text-white transition-all duration-300 hover:border-[#39E63F]"
+            >
+              <BotMessageSquare
+                size={20}
+                className="text-[#39E63F]"
               />
 
-              <button className="flex h-12 w-14 items-center justify-center bg-[#39E63F]">
-                <Search size={20} className="text-white" />
-              </button>
-            </div>
+              <span className="font-medium">
+                AI Assistant
+              </span>
+            </button>
 
+            {/* Mobile Enroll Button */}
             <a
               href="#admissions"
-              onClick={() => setMobileMenuOpen(false)}
-              className="mt-3 rounded-full bg-[#39E63F] py-3 text-center font-semibold text-[#1B1F29] transition hover:bg-[#2DD636]"
+              onClick={(e) => {
+                e.preventDefault();
+
+                document
+                  .querySelector("#admissions")
+                  ?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                  });
+
+                setActiveSection("admissions");
+                setMobileMenuOpen(false);
+              }}
+              className="mt-2 rounded-full bg-[#39E63F] py-3 text-center font-semibold text-[#1B1F29] transition hover:bg-[#2DD636]"
             >
               Enroll Now
             </a>
+
           </nav>
+
         </div>
       </div>
     </header>
