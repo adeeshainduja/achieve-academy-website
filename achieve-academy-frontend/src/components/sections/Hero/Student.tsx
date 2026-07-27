@@ -1,40 +1,54 @@
 import { useEffect, useRef } from "react";
 import { Group } from "three";
-import { useGLTF, useAnimations } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
+import { useAnimations, useGLTF } from "@react-three/drei";
 
 export default function Student() {
   const group = useRef<Group>(null);
 
-  const { scene, animations } = useGLTF(
-    "/src/assets/models/student_run.glb"
-  );
+  // Load model
+  const { scene, animations } = useGLTF("/models/student_run.glb");
 
+  // Setup animations
   const { actions } = useAnimations(animations, group);
 
   useEffect(() => {
-    const firstAnimation = Object.values(actions)[0];
+    const animation = Object.values(actions)[0];
 
-    if (firstAnimation) {
-      firstAnimation.reset();
-      firstAnimation.fadeIn(0.3);
-      firstAnimation.play();
+    if (animation) {
+      animation.reset();
+      animation.fadeIn(0.3);
+      animation.play();
     }
 
     return () => {
-      firstAnimation?.fadeOut(0.3);
+      animation?.fadeOut(0.3);
     };
   }, [actions]);
+
+  // Character movement
+  useFrame((_, delta) => {
+    if (!group.current) return;
+
+    // Run forward until reaching trophy
+    if (group.current.position.x < 1.8) {
+      group.current.position.x += delta * 1.2;
+    }
+  });
 
   return (
     <group
       ref={group}
-      position={[-2.5, -1.4, 0]}
+      position={[-2.8, -1.4, 0]}
       rotation={[0, -Math.PI / 2, 0]}
       scale={2.6}
+      castShadow
+      receiveShadow
     >
       <primitive object={scene} />
     </group>
   );
 }
 
-useGLTF.preload("/src/assets/models/student_run.glb");
+// Preload model
+useGLTF.preload("/models/student_run.glb");
