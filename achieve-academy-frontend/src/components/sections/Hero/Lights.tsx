@@ -1,26 +1,28 @@
-import { Environment } from "@react-three/drei";
-
 export default function Lights() {
   return (
     <>
-      <ambientLight intensity={1.2} />
+      <ambientLight intensity={0.9} />
 
       <directionalLight
         castShadow
-        position={[8, 8, 5]}
+        position={[5, 6, 5]}
         intensity={2.5}
         shadow-mapSize-width={2048}
         shadow-mapSize-height={2048}
       />
 
-      <spotLight
-        position={[-6, 8, 6]}
-        angle={0.45}
-        penumbra={1}
-        intensity={1.5}
+      <directionalLight
+        position={[-5, 3, 2]}
+        intensity={0.6}
       />
 
-      <Environment preset="sunset" />
+      <spotLight
+        castShadow
+        position={[0, 8, 4]}
+        intensity={1.6}
+        angle={0.35}
+        penumbra={1}
+      />
     </>
   );
 }
