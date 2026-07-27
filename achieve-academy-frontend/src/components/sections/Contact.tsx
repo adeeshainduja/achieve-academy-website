@@ -216,7 +216,7 @@ ${formData.message}`;
                     </p>
 
                     <h3 className="mt-1 text-sm font-semibold text-[#083B35]">
-                      admissions@achieveacademy.lk
+                      ad@achieveacademy.lk
                     </h3>
 
                   </div>

@@ -17,7 +17,7 @@ export default function Footer() {
 
       <div className="absolute bottom-0 right-0 h-80 w-80 rounded-full bg-emerald-500/10 blur-[140px]" />
 
-      <div className="relative mx-auto max-w-6xl px-6 py-12">
+      <div className="relative mx-auto max-w-6xl px-6 pt-12 pb-6">
 
         <div className="grid gap-8 lg:grid-cols-[1.5fr_1fr_1fr_1.2fr]">
 
