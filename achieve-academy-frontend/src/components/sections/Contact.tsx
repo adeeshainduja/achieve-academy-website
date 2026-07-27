@@ -99,7 +99,9 @@ ${formData.message}`;
   };
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-white via-[#F8FCF8] to-[#EEF8F3] py-24">
+    <section 
+        id="contact"
+        className="relative overflow-hidden bg-gradient-to-br from-white via-[#F8FCF8] to-[#EEF8F3] py-24">
 
       {/* Background */}
 

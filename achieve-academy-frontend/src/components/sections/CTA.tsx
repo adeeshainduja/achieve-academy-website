@@ -2,7 +2,9 @@ import { ArrowRight } from "lucide-react";
 
 export default function CTA() {
   return (
-    <section className="bg-[#F8FAFB] py-24">
+    <section 
+        id="cta"
+        className="bg-[#F8FAFB] py-24">
       <div className="mx-auto max-w-7xl px-6">
         <div className="overflow-hidden rounded-[40px] bg-gradient-to-r from-[#043B2E] to-[#06513F] px-8 py-24 text-center shadow-2xl">
 

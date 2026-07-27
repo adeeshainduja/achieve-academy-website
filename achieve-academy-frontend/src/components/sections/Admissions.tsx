@@ -39,8 +39,10 @@ const steps = [
 
 export default function Admissions() {
   return (
-    <section className="relative overflow-hidden bg-[#F8FCF8] py-24">
-
+    <section 
+        id="admissions"
+        className="relative overflow-hidden bg-[#F8FCF8] py-24">
+        
       {/* Background Decorations */}
 
       <div className="absolute inset-0 overflow-hidden">

@@ -5,7 +5,7 @@ import logo from "../../assets/images/logo.png";
 const navItems = [
   { label: "Home", href: "#home" },
   { label: "About", href: "#about" },
-  { label: "Courses", href: "#courses" },
+  { label: "Courses", href: "#programs" },
   { label: "Admissions", href: "#admissions" },
   { label: "Contact", href: "#contact" },
 ];

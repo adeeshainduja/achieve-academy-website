@@ -32,7 +32,9 @@ const testimonials = [
 
 export default function SuccessStories() {
   return (
-    <section className="bg-[#F8FAFB] py-24">
+    <section 
+        id="success-stories"
+        className="bg-[#F8FAFB] py-24">
       <div className="mx-auto max-w-7xl px-6">
 
         {/* Heading */}

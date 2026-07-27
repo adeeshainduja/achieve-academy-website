@@ -88,7 +88,9 @@ const programs = [
 
 export default function Programs() {
   return (
-    <section className="relative overflow-hidden bg-[#f8fbf8] py-24">
+    <section 
+        id="programs"
+        className="relative overflow-hidden bg-[#f8fbf8] py-24">
 
       {/* Background Decorations */}
       <div className="absolute inset-0">
