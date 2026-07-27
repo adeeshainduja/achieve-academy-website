@@ -32,13 +32,27 @@ export default function Hero() {
 
           <div className="mt-10 flex flex-wrap gap-5">
 
-            <button className="rounded-full bg-[#033B34] px-8 py-4 font-semibold text-white transition hover:scale-105">
+            <button
+              onClick={() =>
+                document.getElementById("programs")?.scrollIntoView({
+                  behavior: "smooth",
+                })
+              }
+              className="rounded-full bg-[#0B3C36] px-10 py-5 text-lg font-semibold text-white transition-all duration-300 hover:scale-105"
+            >
               Explore Courses
             </button>
 
-            <button className="rounded-full bg-[#B8FF30] px-8 py-4 font-semibold text-[#033B34] transition hover:scale-105">
-              Contact Us
-            </button>
+            <button
+            onClick={() =>
+              document.getElementById("contact")?.scrollIntoView({
+                behavior: "smooth",
+              })
+            }
+            className="rounded-full bg-lime-400 px-10 py-5 text-lg font-semibold text-[#0B3C36] transition-all duration-300 hover:scale-105"
+          >
+            Contact Us
+          </button>
 
           </div>
 
