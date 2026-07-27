@@ -40,9 +40,9 @@ export default function Trophy() {
   return (
     <group
       ref={group}
-      position={[0.6, -0.80, 0.08]}
-      rotation={[0, 0.25, 0]}
-      scale={1.30}
+        position={[-0.35, -0.80, 0.10]}
+        rotation={[0, 0.2, 0]}
+        scale={1.45}
     >
       <primitive object={scene} />
 
