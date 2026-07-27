@@ -6,6 +6,7 @@ import Admissions from "./components/sections/Admissions";
 import SuccessStories from "./components/sections/SuccessStories";
 import CTA from "./components/sections/CTA";
 import Contact from "./components/sections/Contact";
+import Footer from "./components/layout/Footer";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <SuccessStories />
       <CTA />
       <Contact />
+      <Footer />
     </div>
   );
 }
