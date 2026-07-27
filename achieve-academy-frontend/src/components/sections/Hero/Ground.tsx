@@ -4,21 +4,19 @@ export default function Ground() {
   return (
     <mesh
       rotation={[-Math.PI / 2, 0, 0]}
-      position={[0, -1.45, 0]}
+      position={[0, -1, 0]}
       receiveShadow
     >
       <planeGeometry args={[30, 30]} />
 
       <MeshReflectorMaterial
-        blur={[300, 100]}
         resolution={1024}
+        blur={[300, 100]}
         mixBlur={1}
-        mixStrength={20}
-        roughness={1}
-        depthScale={1}
-        minDepthThreshold={0.85}
-        color="#dff7e5"
-        metalness={0.2}
+        mixStrength={8}
+        roughness={0.85}
+        color="#fafafa"
+        metalness={0}
       />
     </mesh>
   );
