@@ -18,7 +18,13 @@ export default function Student() {
     });
 
     const firstAnimation = Object.values(actions)[0];
-    firstAnimation?.reset().fadeIn(0.5).play();
+
+    if (firstAnimation) {
+      firstAnimation
+        .reset()
+        .fadeIn(0.5)
+        .play();
+    }
   }, [actions, scene]);
 
   useFrame(({ clock, mouse }) => {
@@ -26,32 +32,36 @@ export default function Student() {
 
     const t = clock.getElapsedTime();
 
-    // Floating
+    // Floating animation
     group.current.position.y =
-      -1 + Math.sin(t * 2) * 0.03;
+      -0.80 + Math.sin(t * 2) * 0.03;
 
-    // Face trophy + mouse
-    const targetRotation = -0.65 + mouse.x * 0.15;
+    // Look slightly at trophy + mouse
+    const targetRotation =
+      -0.78 + mouse.x * 0.15;
 
-    group.current.rotation.y = THREE.MathUtils.lerp(
-      group.current.rotation.y,
-      targetRotation,
-      0.05
-    );
+    group.current.rotation.y =
+      THREE.MathUtils.lerp(
+        group.current.rotation.y,
+        targetRotation,
+        0.05
+      );
 
-    group.current.rotation.z = THREE.MathUtils.lerp(
-      group.current.rotation.z,
-      mouse.x * 0.02,
-      0.05
-    );
+    // Small body tilt
+    group.current.rotation.z =
+      THREE.MathUtils.lerp(
+        group.current.rotation.z,
+        mouse.x * 0.02,
+        0.05
+      );
   });
 
   return (
     <group
       ref={group}
-        position={[0.82, -1, -0.05]}
-        rotation={[0, -0.78, 0]}
-        scale={0.92}
+      position={[0.82, -0.80, -0.05]}
+      rotation={[0, -0.78, 0]}
+      scale={0.92}
     >
       <primitive object={scene} />
     </group>

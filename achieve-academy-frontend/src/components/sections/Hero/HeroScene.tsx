@@ -16,18 +16,17 @@ export default function HeroScene() {
     <Canvas
       shadows
       dpr={[1, 2]}
+      gl={{ alpha: true }}
       camera={{
-        position: [0, 1.5, 5.8],
+        position: [0, 2.2, 5.8],
         fov: 30,
       }}
       style={{
         width: "100%",
         height: "100%",
-        background: "#FBFCFB",
+        background: "transparent",
       }}
     >
-      <color attach="background" args={["#FBFCFB"]} />
-
       <Suspense fallback={null}>
         <Environment preset="studio" />
 
@@ -35,8 +34,7 @@ export default function HeroScene() {
 
         <CameraRig />
 
-        {/* Scene Group */}
-        <group position={[0.25, 0, 0]} scale={1}>
+        <group position={[0.25, 0, 0]}>
           <Ground />
 
           <Student />
@@ -49,6 +47,7 @@ export default function HeroScene() {
             scale={10}
             blur={2.5}
             far={4}
+            color="#000000"
           />
         </group>
       </Suspense>

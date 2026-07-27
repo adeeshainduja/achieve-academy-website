@@ -24,25 +24,25 @@ export default function Trophy() {
 
     // Floating
     group.current.position.y =
-      -0.80 + Math.sin(t * 2) * 0.04;
+      -0.60 + Math.sin(t * 2) * 0.04;
 
     // Slow rotation
     group.current.rotation.y =
-      0.25 + Math.sin(t * 0.5) * 0.05;
+      0.20 + Math.sin(t * 0.5) * 0.05;
 
-    // Gentle pulse
-    const scale =
-      1.30 + Math.sin(t * 2) * 0.02;
+    // Gentle scale pulse
+    const s =
+      1.45 + Math.sin(t * 2) * 0.02;
 
-    group.current.scale.set(scale, scale, scale);
+    group.current.scale.set(s, s, s);
   });
 
   return (
     <group
       ref={group}
-        position={[-0.35, -0.80, 0.10]}
-        rotation={[0, 0.2, 0]}
-        scale={1.45}
+      position={[-0.3, -0.60, 0.10]}
+      rotation={[0, 0.20, 0]}
+      scale={1.45}
     >
       <primitive object={scene} />
 

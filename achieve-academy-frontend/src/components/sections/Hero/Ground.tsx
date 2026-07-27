@@ -1,5 +1,3 @@
-import { MeshReflectorMaterial } from "@react-three/drei";
-
 export default function Ground() {
   return (
     <mesh
@@ -9,14 +7,9 @@ export default function Ground() {
     >
       <planeGeometry args={[30, 30]} />
 
-      <MeshReflectorMaterial
-        resolution={1024}
-        blur={[300, 100]}
-        mixBlur={1}
-        mixStrength={8}
-        roughness={0.85}
-        color="#fafafa"
-        metalness={0}
+      <shadowMaterial
+        transparent
+        opacity={0.18}
       />
     </mesh>
   );
