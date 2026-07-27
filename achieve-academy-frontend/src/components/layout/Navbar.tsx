@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { Menu, Search, X } from "lucide-react";
+import { BotMessageSquare, Menu, Search, X } from "lucide-react";
 import logo from "../../assets/images/logo.png";
+
 
 const navItems = [
   { label: "Home", href: "#home" },
@@ -105,21 +106,26 @@ const Navbar = () => {
 
         {/* Right Side */}
         <div className="hidden items-center gap-4 lg:flex">
-          <div className="flex items-center overflow-hidden rounded-full border border-[#2F3744] bg-[#222833]">
-            <input
-              type="text"
-              placeholder="Search"
-              className="w-64 bg-transparent px-5 py-1.5 text-white placeholder:text-gray-400 outline-none"
+
+          <button
+            onClick={() => {
+              window.dispatchEvent(new Event("open-ai-chat"));
+            }}
+            className="flex items-center gap-2 rounded-full border border-[#2F3744] bg-[#222833] px-5 py-2 text-white transition-all duration-300 hover:border-[#39E63F] hover:bg-[#2A313D]"
+          >
+            <BotMessageSquare
+              size={20}
+              className="text-[#39E63F]"
             />
 
-            <button className="flex h-9 w-11 items-center justify-center bg-[#499A13] transition hover:bg-[#2DD636]">
-              <Search size={20} className="text-white" />
-            </button>
-          </div>
+            <span className="font-medium">
+              AI Assistant
+            </span>
+          </button>
 
           <a
             href="#admissions"
-            className="rounded-full bg-[#499A13] px-7 py-1.5 font-semibold text-[#1B1F29] shadow-lg transition-all duration-300 hover:scale-105 hover:bg-[#2DD636]"
+            className="rounded-full bg-[#499A13] px-7 py-2 font-semibold text-[#1B1F29] shadow-lg transition-all duration-300 hover:scale-105 hover:bg-[#2DD636]"
           >
             Enroll Now
           </a>
