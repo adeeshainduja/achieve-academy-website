@@ -1,5 +1,6 @@
 import HeroScene from "./HeroScene";
 
+
 export default function Hero() {
   return (
     <section
