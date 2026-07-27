@@ -7,6 +7,7 @@ import SuccessStories from "./components/sections/SuccessStories";
 import CTA from "./components/sections/CTA";
 import Contact from "./components/sections/Contact";
 import Footer from "./components/layout/Footer";
+import ChatWidget from "./components/chatbot/ChatWidget";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
       <CTA />
       <Contact />
       <Footer />
+      <ChatWidget />
     </div>
   );
 }
