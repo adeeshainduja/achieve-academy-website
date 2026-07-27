@@ -4,8 +4,10 @@ import {
   Mail,
   Phone,
   MapPin,
+  Clock3,
   MessageCircle,
   Send,
+  CheckCircle2,
 } from "lucide-react";
 
 export default function Contact() {
@@ -16,13 +18,16 @@ export default function Contact() {
     firstName: "",
     lastName: "",
     email: "",
+    phone: "",
     program: "",
     message: "",
   });
 
   const handleChange = (
     e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+      HTMLInputElement |
+      HTMLTextAreaElement |
+      HTMLSelectElement
     >
   ) => {
     setFormData((prev) => ({
@@ -32,13 +37,15 @@ export default function Contact() {
   };
 
   const openWhatsApp = () => {
-    const phone = "94712345678"; // Replace with your WhatsApp number
+    const phone = "94712345678";
 
     const message = `Hello Achieve Academy,
 
 Name: ${formData.firstName} ${formData.lastName}
 
 Email: ${formData.email}
+
+Phone: ${formData.phone}
 
 Program: ${formData.program}
 
@@ -66,6 +73,7 @@ ${formData.message}`;
           first_name: formData.firstName,
           last_name: formData.lastName,
           email: formData.email,
+          phone: formData.phone,
           program: formData.program,
           message: formData.message,
         },
@@ -78,119 +86,210 @@ ${formData.message}`;
         firstName: "",
         lastName: "",
         email: "",
+        phone: "",
         program: "",
         message: "",
       });
-    } catch (error) {
-      console.error(error);
-      alert("Failed to send inquiry.");
+
+    } catch (err) {
+      console.error(err);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-[#032720] via-[#054237] to-[#08614C] py-24">
+    <section className="relative overflow-hidden bg-gradient-to-br from-white via-[#F8FCF8] to-[#EEF8F3] py-24">
 
       {/* Background */}
 
-      <div className="absolute -left-40 top-0 h-80 w-80 rounded-full bg-lime-400/20 blur-[100px]" />
-      <div className="absolute bottom-0 right-0 h-96 w-96 rounded-full bg-emerald-500/20 blur-[120px]" />
+      <div className="absolute inset-0 overflow-hidden">
 
-      <div className="relative mx-auto max-w-7xl px-6">
+        <div className="absolute -top-40 -left-40 h-[420px] w-[420px] rounded-full bg-lime-200/40 blur-[120px]" />
 
-        <div className="grid items-center gap-14 lg:grid-cols-2">
+        <div className="absolute right-0 top-0 h-[380px] w-[380px] rounded-full bg-emerald-100 blur-[120px]" />
 
-          {/* LEFT SIDE */}
+        <div
+          className="absolute right-12 top-16 h-40 w-40 opacity-20"
+          style={{
+            backgroundImage:
+              "radial-gradient(#0B3C36 1px, transparent 1px)",
+            backgroundSize: "14px 14px",
+          }}
+        />
+
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-7xl px-6">
+
+        <div className="grid items-center gap-20 lg:grid-cols-2">
+
+          {/* LEFT */}
 
           <div>
 
-            <span className="inline-flex rounded-full border border-lime-300/20 bg-white/10 px-5 py-2 text-xs uppercase tracking-[0.3em] text-lime-300 backdrop-blur-xl">
+            <span className="inline-flex rounded-full border border-lime-300 bg-lime-100 px-5 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-[#0B3C36]">
+
               Contact Us
+
             </span>
 
-            <h2 className="mt-6 text-5xl font-bold text-white leading-tight">
+            <h2 className="mt-8 text-5xl font-bold leading-tight text-[#083B35] lg:text-6xl">
+
               Let's Build
-              <span className="block text-lime-300">
+
+              <span className="block bg-gradient-to-r from-lime-500 to-emerald-600 bg-clip-text text-transparent">
+
                 Your Future Together
+
               </span>
+
             </h2>
 
-            <p className="mt-6 max-w-lg leading-8 text-gray-300">
+            <p className="mt-8 max-w-xl text-lg leading-9 text-gray-600">
+
               Have questions about admissions,
-              courses or fees?
-              Our admissions team is ready to help
-              you choose the right learning path.
+              programs or tuition fees?
+
+              Our academic advisors are here to help
+              you choose the best learning path.
+
             </p>
 
-            <div className="mt-10 space-y-5">
-                              {/* Phone Card */}
+            {/* Contact Cards */}
+
+            <div className="mt-12 grid gap-5 md:grid-cols-2">
+                              {/* Phone */}
 
               <a
                 href="tel:+94712345678"
-                className="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/10 p-5 backdrop-blur-xl transition duration-300 hover:bg-white/20"
+                className="group rounded-3xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
               >
-                <div className="rounded-xl bg-lime-300 p-3">
-                  <Phone size={22} className="text-[#054237]" />
-                </div>
+                <div className="flex items-center gap-4">
 
-                <div>
-                  <h3 className="font-semibold text-white">
-                    Call Us
-                  </h3>
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-lime-100 transition-all duration-300 group-hover:bg-lime-400">
 
-                  <p className="text-sm text-gray-300">
-                    +94 71 234 5678
-                  </p>
+                    <Phone
+                      size={24}
+                      className="text-[#083B35]"
+                    />
+
+                  </div>
+
+                  <div>
+
+                    <p className="text-sm text-gray-500">
+                      Call Us
+                    </p>
+
+                    <h3 className="mt-1 font-semibold text-[#083B35]">
+                      +94 71 234 5678
+                    </h3>
+
+                  </div>
+
                 </div>
 
               </a>
 
-              {/* Email Card */}
+              {/* Email */}
 
               <a
                 href="mailto:admissions@achieveacademy.lk"
-                className="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/10 p-5 backdrop-blur-xl transition duration-300 hover:bg-white/20"
+                className="group rounded-3xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
               >
-                <div className="rounded-xl bg-lime-300 p-3">
-                  <Mail size={22} className="text-[#054237]" />
-                </div>
+                <div className="flex items-center gap-4">
 
-                <div>
-                  <h3 className="font-semibold text-white">
-                    Email
-                  </h3>
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-lime-100 transition-all duration-300 group-hover:bg-lime-400">
 
-                  <p className="text-sm text-gray-300">
-                    admissions@achieveacademy.lk
-                  </p>
+                    <Mail
+                      size={24}
+                      className="text-[#083B35]"
+                    />
+
+                  </div>
+
+                  <div>
+
+                    <p className="text-sm text-gray-500">
+                      Email
+                    </p>
+
+                    <h3 className="mt-1 text-sm font-semibold text-[#083B35]">
+                      admissions@achieveacademy.lk
+                    </h3>
+
+                  </div>
+
                 </div>
 
               </a>
 
-              {/* Address Card */}
+              {/* Location */}
 
               <a
                 href="https://maps.google.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/10 p-5 backdrop-blur-xl transition duration-300 hover:bg-white/20"
+                className="group rounded-3xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
               >
-                <div className="rounded-xl bg-lime-300 p-3">
-                  <MapPin size={22} className="text-[#054237]" />
-                </div>
+                <div className="flex items-center gap-4">
 
-                <div>
-                  <h3 className="font-semibold text-white">
-                    Visit Us
-                  </h3>
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-lime-100 transition-all duration-300 group-hover:bg-lime-400">
 
-                  <p className="text-sm text-gray-300">
-                    Colombo, Sri Lanka
-                  </p>
+                    <MapPin
+                      size={24}
+                      className="text-[#083B35]"
+                    />
+
+                  </div>
+
+                  <div>
+
+                    <p className="text-sm text-gray-500">
+                      Location
+                    </p>
+
+                    <h3 className="mt-1 font-semibold text-[#083B35]">
+                      Colombo, Sri Lanka
+                    </h3>
+
+                  </div>
+
                 </div>
 
               </a>
+
+              {/* Working Hours */}
+
+              <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
+
+                <div className="flex items-center gap-4">
+
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-lime-100">
+
+                    <Clock3
+                      size={24}
+                      className="text-[#083B35]"
+                    />
+
+                  </div>
+
+                  <div>
+
+                    <p className="text-sm text-gray-500">
+                      Mon - Sat
+                    </p>
+
+                    <h3 className="mt-1 font-semibold text-[#083B35]">
+                      8:00 AM - 7:00 PM
+                    </h3>
+
+                  </div>
+
+                </div>
+
+              </div>
 
             </div>
 
@@ -200,32 +299,38 @@ ${formData.message}`;
 
           <form
             onSubmit={handleSubmit}
-            className="rounded-[30px] border border-white/10 bg-white/10 p-8 shadow-2xl backdrop-blur-3xl"
+            className="rounded-[32px] border border-gray-200 bg-white p-8 shadow-[0_20px_60px_rgba(15,23,42,0.08)]"
           >
                         {/* Success Message */}
 
             {success && (
-              <div className="mb-6 rounded-2xl border border-green-500/30 bg-green-500/20 p-5">
-                <h3 className="font-semibold text-green-300">
-                  ✅ Inquiry Sent Successfully
-                </h3>
+              <div className="mb-6 flex items-center gap-4 rounded-2xl border border-green-200 bg-green-50 p-5">
 
-                <p className="mt-2 text-sm text-gray-100">
-                  Thank you for contacting Achieve Academy.
-                  Our admissions team will contact you soon.
-                </p>
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-lime-400">
 
-                <button
-                  type="button"
-                  onClick={openWhatsApp}
-                  className="mt-5 w-full rounded-xl bg-[#25D366] py-3 font-semibold text-white transition hover:bg-[#1EBE5D]"
-                >
-                  Continue on WhatsApp
-                </button>
+                  <CheckCircle2
+                    size={24}
+                    className="text-white"
+                  />
+
+                </div>
+
+                <div>
+
+                  <h3 className="font-semibold text-[#083B35]">
+                    Thank You!
+                  </h3>
+
+                  <p className="text-sm text-gray-600">
+                    We'll contact you within 24 hours.
+                  </p>
+
+                </div>
+
               </div>
             )}
 
-            {/* First & Last Name */}
+            {/* First Row */}
 
             <div className="grid gap-5 md:grid-cols-2">
 
@@ -236,7 +341,7 @@ ${formData.message}`;
                 value={formData.firstName}
                 onChange={handleChange}
                 required
-                className="rounded-xl border border-white/10 bg-white/10 px-4 py-3 text-white placeholder:text-gray-300 outline-none focus:border-lime-300"
+                className="rounded-2xl border border-gray-200 bg-[#F8FAFB] px-5 py-4 text-[#083B35] outline-none transition-all focus:border-lime-400 focus:ring-4 focus:ring-lime-100"
               />
 
               <input
@@ -246,7 +351,7 @@ ${formData.message}`;
                 value={formData.lastName}
                 onChange={handleChange}
                 required
-                className="rounded-xl border border-white/10 bg-white/10 px-4 py-3 text-white placeholder:text-gray-300 outline-none focus:border-lime-300"
+                className="rounded-2xl border border-gray-200 bg-[#F8FAFB] px-5 py-4 text-[#083B35] outline-none transition-all focus:border-lime-400 focus:ring-4 focus:ring-lime-100"
               />
 
             </div>
@@ -260,7 +365,18 @@ ${formData.message}`;
               value={formData.email}
               onChange={handleChange}
               required
-              className="mt-5 w-full rounded-xl border border-white/10 bg-white/10 px-4 py-3 text-white placeholder:text-gray-300 outline-none focus:border-lime-300"
+              className="mt-5 w-full rounded-2xl border border-gray-200 bg-[#F8FAFB] px-5 py-4 text-[#083B35] outline-none transition-all focus:border-lime-400 focus:ring-4 focus:ring-lime-100"
+            />
+
+            {/* Phone */}
+
+            <input
+              type="tel"
+              name="phone"
+              placeholder="Phone Number"
+              value={formData.phone}
+              onChange={handleChange}
+              className="mt-5 w-full rounded-2xl border border-gray-200 bg-[#F8FAFB] px-5 py-4 text-[#083B35] outline-none transition-all focus:border-lime-400 focus:ring-4 focus:ring-lime-100"
             />
 
             {/* Program */}
@@ -270,33 +386,33 @@ ${formData.message}`;
               value={formData.program}
               onChange={handleChange}
               required
-              className="mt-5 w-full rounded-xl border border-white/10 bg-white/10 px-4 py-3 text-white outline-none focus:border-lime-300"
+              className="mt-5 w-full rounded-2xl border border-gray-200 bg-[#F8FAFB] px-5 py-4 text-[#083B35] outline-none transition-all focus:border-lime-400 focus:ring-4 focus:ring-lime-100"
             >
-              <option value="" className="text-black">
+              <option value="">
                 Select a Program
               </option>
 
-              <option value="O/L" className="text-black">
+              <option value="O/L">
                 G.C.E Ordinary Level
               </option>
 
-              <option value="A/L Science" className="text-black">
+              <option value="A/L Science">
                 A/L Science
               </option>
 
-              <option value="A/L Commerce" className="text-black">
+              <option value="A/L Commerce">
                 A/L Commerce
               </option>
 
-              <option value="A/L Arts" className="text-black">
+              <option value="A/L Arts">
                 A/L Arts
               </option>
 
-              <option value="ICT" className="text-black">
+              <option value="ICT">
                 ICT Programs
               </option>
 
-              <option value="English" className="text-black">
+              <option value="English">
                 English Courses
               </option>
 
@@ -305,39 +421,64 @@ ${formData.message}`;
             {/* Message */}
 
             <textarea
-              rows={5}
+              rows={6}
               name="message"
               placeholder="Write your message..."
               value={formData.message}
               onChange={handleChange}
               required
-              className="mt-5 w-full rounded-xl border border-white/10 bg-white/10 px-4 py-3 text-white placeholder:text-gray-300 outline-none focus:border-lime-300"
+              className="mt-5 w-full rounded-2xl border border-gray-200 bg-[#F8FAFB] px-5 py-4 text-[#083B35] outline-none transition-all focus:border-lime-400 focus:ring-4 focus:ring-lime-100"
             />
-                        {/* Buttons */}
+                          {/* Buttons */}
 
-            <div className="mt-6 space-y-4">
+            <div className="mt-6 flex flex-col gap-4 sm:flex-row">
+
+              {/* Send */}
 
               <button
                 type="submit"
                 disabled={loading}
-                className="flex w-full items-center justify-center gap-3 rounded-xl bg-lime-300 py-3 font-semibold text-[#054237] transition hover:bg-lime-400 disabled:cursor-not-allowed disabled:opacity-60"
+                className="group flex flex-1 items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-lime-400 to-lime-500 px-6 py-4 font-semibold text-[#083B35] shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-60"
               >
-                <Send size={20} />
+                <Send
+                  size={18}
+                  className="transition-transform duration-300 group-hover:translate-x-1"
+                />
 
                 {loading ? "Sending..." : "Send Inquiry"}
 
               </button>
 
+              {/* WhatsApp */}
+
               <button
                 type="button"
                 onClick={openWhatsApp}
-                className="flex w-full items-center justify-center gap-3 rounded-xl border border-green-500 bg-green-500/20 py-3 font-semibold text-white transition hover:bg-green-500"
+                className="group flex flex-1 items-center justify-center gap-2 rounded-2xl border border-green-500 bg-green-500 px-6 py-4 font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-green-600"
               >
-                <MessageCircle size={20} />
+                <MessageCircle
+                  size={18}
+                  className="transition-transform duration-300 group-hover:scale-110"
+                />
 
-                Chat on WhatsApp
+                WhatsApp
 
               </button>
+
+            </div>
+
+            {/* Trust Text */}
+
+            <div className="mt-6 flex items-center justify-center gap-2 text-sm text-gray-500">
+
+              <CheckCircle2
+                size={16}
+                className="text-lime-500"
+              />
+
+              <span>
+                Usually responds within 24 hours
+              </span>
 
             </div>
 
