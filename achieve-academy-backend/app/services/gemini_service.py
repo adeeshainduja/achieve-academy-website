@@ -47,15 +47,15 @@ User Question:
 
     try:
         response = client.models.generate_content(
-            model="gemini-3.6-flash",
+            model="gemini-2.5-flash",
             contents=prompt,
         )
 
-        return response.text
+        if hasattr(response, "text") and response.text:
+            return response.text
+
+        return "Sorry, I couldn't generate a response."
 
     except Exception as e:
-        print("Gemini Error:", e)
-        return (
-            "Sorry, I'm currently unavailable. "
-            "Please try again later or contact Achieve Academy."
-        )
+        print(f"Gemini Error: {e}")
+        raise
