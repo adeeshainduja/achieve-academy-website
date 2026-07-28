@@ -29,6 +29,7 @@ https://achieve-academy-website.onrender.com
 - Mobile-friendly design
 - FastAPI REST API backend
 - Vercel + Render deployment
+- Cloud-hosted Neon PostgreSQL database integration 
 
 ---
 
@@ -40,7 +41,6 @@ https://achieve-academy-website.onrender.com
 - TypeScript
 - Vite
 - Tailwind CSS
-- Axios
 
 ### Backend
 
@@ -53,6 +53,11 @@ https://achieve-academy-website.onrender.com
 
 - Vercel
 - Render
+
+### UI/UX Design 
+
+- Figma
+- Blender 
 
 ---
 
