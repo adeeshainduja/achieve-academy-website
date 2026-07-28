@@ -1,11 +1,8 @@
-import google.generativeai as genai
+from google import genai
 
 from app.core.config import GEMINI_API_KEY
 
-genai.configure(api_key=GEMINI_API_KEY)
-
-model = genai.GenerativeModel("gemini-2.5-flash")
-
+client = genai.Client(api_key=GEMINI_API_KEY)
 
 SYSTEM_PROMPT = """
 You are the official AI Assistant for Achieve Academy.
@@ -39,7 +36,6 @@ reply politely that you can only provide public information.
 
 
 def generate_response(message: str) -> str:
-
     prompt = f"""
 {SYSTEM_PROMPT}
 
@@ -47,6 +43,9 @@ User Question:
 {message}
 """
 
-    response = model.generate_content(prompt)
+    response = client.models.generate_content(
+        model="gemini-2.5-flash",
+        contents=prompt,
+    )
 
     return response.text
