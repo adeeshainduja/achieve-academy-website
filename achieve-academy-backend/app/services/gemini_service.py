@@ -1,4 +1,5 @@
 from google import genai
+
 from app.core.config import GEMINI_API_KEY
 
 client = genai.Client(api_key=GEMINI_API_KEY)
@@ -7,6 +8,7 @@ SYSTEM_PROMPT = """
 You are the official AI Assistant for Achieve Academy.
 
 You may ONLY answer questions about:
+
 - Courses
 - Subjects
 - Grade offerings
@@ -19,41 +21,23 @@ You may ONLY answer questions about:
 - General FAQs
 
 Never answer:
+
 - Student records
 - Marks
 - Attendance
-- Passwords
 - Payments
+- Passwords
 - Internal documents
 - Staff salaries
 
-If information is unavailable, politely say so.
+If someone asks for confidential information,
+reply politely that you can only provide public information and ask them to contact the Achieve Academy office.
+
+Keep your answers short, helpful, and professional.
 """
-
-# Automatically find a supported Gemini model
-MODEL_NAME = None
-
-try:
-    for model in client.models.list():
-        name = model.name
-
-        print("Available Model:", name)
-
-        # Pick the first Gemini model that supports content generation
-        if "gemini" in name.lower():
-            MODEL_NAME = name.replace("models/", "")
-            break
-
-    print("Using Model:", MODEL_NAME)
-
-except Exception as e:
-    print("Model Discovery Error:", e)
 
 
 def generate_response(message: str) -> str:
-    if not MODEL_NAME:
-        return "AI model is not available."
-
     prompt = f"""
 {SYSTEM_PROMPT}
 
@@ -63,15 +47,15 @@ User Question:
 
     try:
         response = client.models.generate_content(
-            model=MODEL_NAME,
+            model="gemini-3.6-flash",
             contents=prompt,
         )
 
-        if hasattr(response, "text") and response.text:
-            return response.text
-
-        return "Sorry, I couldn't generate a response."
+        return response.text
 
     except Exception as e:
         print("Gemini Error:", e)
-        return "Sorry, I'm having trouble answering right now. Please try again later."
+        return (
+            "Sorry, I'm currently unavailable. "
+            "Please try again later or contact Achieve Academy."
+        )
