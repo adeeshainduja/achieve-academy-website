@@ -1,15 +1,12 @@
 from google import genai
-
 from app.core.config import GEMINI_API_KEY
 
-# Initialize Gemini client
 client = genai.Client(api_key=GEMINI_API_KEY)
 
 SYSTEM_PROMPT = """
 You are the official AI Assistant for Achieve Academy.
 
 You may ONLY answer questions about:
-
 - Courses
 - Subjects
 - Grade offerings
@@ -21,27 +18,42 @@ You may ONLY answer questions about:
 - Contact details
 - General FAQs
 
-Rules:
-1. Answer only questions related to Achieve Academy.
-2. Never provide confidential information.
-3. Never invent information.
-4. If the information is unavailable, politely say you don't know.
-5. Keep answers short, friendly, and professional.
-
-Never answer questions about:
+Never answer:
 - Student records
-- Student marks
+- Marks
 - Attendance
 - Passwords
 - Payments
 - Internal documents
 - Staff salaries
+
+If information is unavailable, politely say so.
 """
 
-MODEL_NAME = "gemini-2.5-flash-lite"
+# Automatically find a supported Gemini model
+MODEL_NAME = None
+
+try:
+    for model in client.models.list():
+        name = model.name
+
+        print("Available Model:", name)
+
+        # Pick the first Gemini model that supports content generation
+        if "gemini" in name.lower():
+            MODEL_NAME = name.replace("models/", "")
+            break
+
+    print("Using Model:", MODEL_NAME)
+
+except Exception as e:
+    print("Model Discovery Error:", e)
 
 
 def generate_response(message: str) -> str:
+    if not MODEL_NAME:
+        return "AI model is not available."
+
     prompt = f"""
 {SYSTEM_PROMPT}
 
@@ -61,5 +73,5 @@ User Question:
         return "Sorry, I couldn't generate a response."
 
     except Exception as e:
-        print(f"Gemini Error: {e}")
+        print("Gemini Error:", e)
         return "Sorry, I'm having trouble answering right now. Please try again later."
