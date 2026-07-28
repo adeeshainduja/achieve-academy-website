@@ -8,27 +8,35 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# Allowed Frontend URLs
-origins = [
-    "http://localhost:5174",
-    "http://127.0.0.1:5174",
-    "https://achieve-academy-website.vercel.app",
-]
-
-# CORS
+# CORS Configuration
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=[
+        "http://localhost:5174",
+        "http://127.0.0.1:5174",
+        "https://achieve-academy-website.vercel.app",
+    ],
+    allow_origin_regex=r"https://.*\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["*"],
 )
 
+# Routers
 app.include_router(chatbot_router)
 
 
 @app.get("/")
-def home():
+async def home():
     return {
+        "status": "success",
         "message": "Backend Running Successfully"
+    }
+
+
+@app.get("/health")
+async def health():
+    return {
+        "status": "healthy"
     }
