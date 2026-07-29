@@ -17,6 +17,29 @@ https://achieve-academy-website.onrender.com
 
 ---
 
+## 🤖 Project Overview
+
+Achieve Academy is a modern educational website designed to provide students and 
+parents with easy access to academic information through an AI-powered assistant. The 
+platform enables users to explore courses, admissions, subjects, fees, and contact details 
+while interacting with an intelligent chatbot for instant support. 
+
+The application is built using a React + TypeScript frontend and a FastAPI backend, 
+connected through REST APIs. The backend integrates the Google Gemini API to deliver AI
+generated responses and uses a Neon PostgreSQL cloud database to manage academy
+related information efficiently. 
+
+To enhance user engagement, the website incorporates interactive Three.js 3D elements, 
+while custom 3D assets were created using Blender. The user interface and overall user 
+experience were first designed in Figma, ensuring a clean, modern, and responsive design 
+before implementation. 
+
+The AI assistant is restricted to answering only publicly available academy information, 
+ensuring that confidential data such as student records, examination results, attendance, 
+payments, and internal documents remain protected. 
+
+---
+
 ## ✨ Features
 
 - Modern responsive UI
@@ -41,6 +64,7 @@ https://achieve-academy-website.onrender.com
 - TypeScript
 - Vite
 - Tailwind CSS
+- Three.js
 
 ### Backend
 
@@ -57,7 +81,11 @@ https://achieve-academy-website.onrender.com
 ### UI/UX Design 
 
 - Figma
-- Blender 
+- Blender
+
+### Database
+
+- Neon PostgreSQL
 
 ---
 
@@ -90,7 +118,7 @@ achieve-academy-website/
 ### Clone Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/achieve-academy-website.git
+git clone https://github.com/adeeshainduja/achieve-academy-website.git
 ```
 
 ```
